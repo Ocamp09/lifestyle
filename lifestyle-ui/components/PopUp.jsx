@@ -1,41 +1,61 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import HorizontalRule from "./HotizontalRule";
+import { useState } from "react";
+import { Colors } from "../constants/Colors";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
-const [list, setList] = useState();
+const PopUp = ({ name }) => {
+  const [toDoList, setToDoList] = useState([
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+      ],
+    },
+    {
+      name: "List Name 2",
+      items: [
+        {
+          name: "First item 2",
+          completed: false,
+        },
+      ],
+    },
+  ]);
 
-// setList(
-//     {
-//         list: [
-//           {
-//             name: "List Name",
-//             items: [
-//               {
-//                 name: "First item",
-//                 completed: false,
-//               },
-//             ],
-//           },
-//           {
-//             name: "List Name",
-//             items: [
-//               {
-//                 name: "First item",
-//                 completed: false,
-//               },
-//             ],
-//           },
-//         ],
-//       }
-// )
-
-const PopUp = () => {
   return (
     <View style={styles.popUp}>
       <View style={styles.popUpHeader}>
-        <Text style={styles.headerText}>To-Do</Text>
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>{name}</Text>
+        </View>
+        <View style={styles.buttonView}>
+          <Pressable
+            onPress={() => {
+              console.log("press");
+            }}
+          >
+            <PlusCircleOutlined size={"30em"} />
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.popUpBody}></View>
+      <ScrollView style={styles.popUpBody}>
+        {toDoList.map((list, i) => {
+          const isLast = toDoList.length - 1 === i;
+
+          return (
+            <View>
+              <Text>{list.name}</Text>
+              <Text>{list.items[0].name}</Text>
+              {!isLast && <HorizontalRule />}
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -43,11 +63,29 @@ const PopUp = () => {
 export default PopUp;
 
 const styles = StyleSheet.create({
+  headerTextView: {
+    backgroundColor: "lightgreen",
+  },
+
   headerText: {
     color: "black",
     fontWeight: "bold",
     fontSize: 35,
-    backgroundColor: "pastelGrey",
+  },
+
+  buttonView: {
+    backgroundColor: "lightblue",
+    height: 35,
+    alignSelf: "stretch",
+  },
+
+  button: {
+    backgroundColor: Colors.light.background,
+    size: 35,
+  },
+
+  icon: {
+    color: "black",
   },
 
   popUp: {
@@ -58,6 +96,8 @@ const styles = StyleSheet.create({
   popUpHeader: {
     alignSelf: "stretch",
     paddingBottom: 5,
+    flexDirection: "row",
+    alignItems: "flex-start",
   },
 
   popUpBody: {
