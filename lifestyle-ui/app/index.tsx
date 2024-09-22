@@ -1,13 +1,28 @@
-import HorizontalRule from "@components/hotizontalRule";
+import PopUp from "@components/PopUp";
+import HorizontalRule from "@components/HotizontalRule";
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 const Index = () => {
   return (
     <View style={styles.mainView}>
+      {/* <PopUp /> */}
       <View style={styles.popUp}>
         <View style={styles.popUpHeader}>
-          <Text style={styles.headerText}>To-Do</Text>
+          <Text style={styles.headerText}>Routines</Text>
+        </View>
+        <View style={styles.popUpBody}>
+          <Text>List Name</Text>
+          <Text>First item</Text>
+          <HorizontalRule />
+          <Text>List Name</Text>
+          <Text>First item</Text>
+        </View>
+      </View>
+
+      <View style={styles.popUp}>
+        <View style={styles.popUpHeader}>
+          <Text style={styles.headerText}>Streaks</Text>
         </View>
         <View style={styles.popUpBody}>
           <Text>List Name</Text>
@@ -26,6 +41,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     paddingRight: 25,
     paddingTop: 15,
+    marginTop: 50,
   },
 
   headerText: {
@@ -37,16 +53,16 @@ const styles = StyleSheet.create({
 
   popUp: {
     alignSelf: "stretch",
+    paddingBottom: 30,
   },
 
   popUpHeader: {
-    // backgroundColor: "lightblue",
     alignSelf: "stretch",
     paddingBottom: 5,
   },
 
   popUpBody: {
-    // backgroundColor: "darkgrey",
+    backgroundColor: "lightgrey",
     alignSelf: "stretch",
     borderWidth: 1,
     borderRadius: 5,
