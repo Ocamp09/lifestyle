@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import HorizontalRule from "./HotizontalRule";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
-import { PlusCircleOutlined } from "@ant-design/icons";
+// import { PlusCircleOutlined } from "@ant-design/icons";
 
 const PopUp = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -34,13 +34,13 @@ const PopUp = ({ name }) => {
           <Text style={styles.headerText}>{name}</Text>
         </View>
         <View style={styles.buttonView}>
-          <Pressable
+          {/* <Pressable
             onPress={() => {
               console.log("press");
             }}
           >
             <PlusCircleOutlined size={"30em"} />
-          </Pressable>
+          </Pressable> */}
         </View>
       </View>
       <ScrollView style={styles.popUpBody}>
