@@ -5,8 +5,8 @@ import { View, StyleSheet } from "react-native";
 export default function App() {
   return (
     <View style={styles.mainView}>
-      <PopUp name="To-Do" />
-      <PopUp name="Routines" />
+      <PopUp name="To-Do" type="checklist"/>
+      {/* <PopUp name="Routines" /> */}
     </View>
   );
 }

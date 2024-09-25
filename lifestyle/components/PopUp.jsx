@@ -1,18 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert, FlatList } from "react-native";
 import HorizontalRule from "./HotizontalRule";
-import { useState } from "react";
-import { Colors } from "../constants/Colors";
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState, useEffect } from "react";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import ButtonBar from "./ButtonBar";
 
-const PopUp = ({ name }) => {
+
+const PopUp = ({ name, type }) => {
   const [toDoList, setToDoList] = useState([
     {
       name: "List Name",
       items: [
         {
           name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
           completed: false,
         },
       ],
@@ -28,45 +32,65 @@ const PopUp = ({ name }) => {
     },
   ]);
 
+  const EditItem = (listName, i) => {
+   
+  }
+
+  const createNewItem = (listName, i) => {
+    newItem = {
+      name: "",
+      completed: false,
+    }
+
+    // setToDoList(toDoList[i].items.push(newItem))
+  }
+
+  // useEffect(() => {
+
+  // }, [toDoList])
+
   return (
     <View style={styles.popUp}>
       <View style={styles.popUpHeader}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
         </View>
-        <View style={styles.buttonView}>
-          <Pressable
-            onPress={() => {
-              console.log("press");
-            }}
-            style={{paddingRight:10}}
-          >
-                        <AntDesign name="pluscircleo" size={36} color="black" />
-
-           </Pressable>
-           <Pressable
-            onPress={() => {
-              console.log("press");
-            }}
-          >
-                        <MaterialCommunityIcons name="dots-horizontal-circle-outline" size={42} color="black" />
-
-           </Pressable>
-        </View>
+        <ButtonBar/>
       </View>
-      <ScrollView style={styles.popUpBody}>
+      {/* End of header view */}
+      {/* Start of body view */}
+      <View style={styles.popUpBody}>
         {toDoList.map((list, i) => {
           const isLast = toDoList.length - 1 === i;
-
           return (
             <View key={i}>
               <Text key={"1" + i}>{list.name}</Text>
-              <Text key={"2" + i}>{list.items[0].name}</Text>
+              <View >
+
+              <FlatList
+                data={list.items}
+                renderItem={({item}) => {
+                  return (
+                    <View style={styles.listItemView}>
+                      <View style={styles.listBoxView}>
+                        {type==="checklist" && <BouncyCheckbox fillColor="#9342f5" />}
+                      </View>
+                      <TextInput
+                        style={{}}
+                        value={item.name}
+                        onChangeText={() => {editText(i, item.name)}}
+                        // onSubmitEditing={() => {createNewItem(list.name, i)}}
+                      />
+                    </View>
+                  );
+                }}
+              />
               {!isLast && <HorizontalRule />}
+              </View>
             </View>
           );
         })}
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -93,8 +117,26 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
 
-  icon: {
-    color: "black",
+  listItemView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingBottom: 5
+  },
+
+  listTextView: {
+    alignSelf: "stretch",
+    flex: 1,
+    justifyContent: "center",
+  },
+
+  listBoxView: {
+    width: "100"
+  },
+
+  checkBoxColor: {
+    borderColor: "black"
   },
 
   popUp: {
