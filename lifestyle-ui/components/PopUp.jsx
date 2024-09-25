@@ -48,9 +48,9 @@ const PopUp = ({ name }) => {
           const isLast = toDoList.length - 1 === i;
 
           return (
-            <View>
-              <Text>{list.name}</Text>
-              <Text>{list.items[0].name}</Text>
+            <View key={i}>
+              <Text key={"1" + i}>{list.name}</Text>
+              <Text key={"2" + i}>{list.items[0].name}</Text>
               {!isLast && <HorizontalRule />}
             </View>
           );
