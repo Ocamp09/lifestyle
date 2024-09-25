@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import HorizontalRule from "./HotizontalRule";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
-// import { PlusCircleOutlined } from "@ant-design/icons";
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const PopUp = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -34,13 +35,23 @@ const PopUp = ({ name }) => {
           <Text style={styles.headerText}>{name}</Text>
         </View>
         <View style={styles.buttonView}>
-          {/* <Pressable
+          <Pressable
+            onPress={() => {
+              console.log("press");
+            }}
+            style={{paddingRight:10}}
+          >
+                        <AntDesign name="pluscircleo" size={36} color="black" />
+
+           </Pressable>
+           <Pressable
             onPress={() => {
               console.log("press");
             }}
           >
-            <PlusCircleOutlined size={"30em"} />
-          </Pressable> */}
+                        <MaterialCommunityIcons name="dots-horizontal-circle-outline" size={42} color="black" />
+
+           </Pressable>
         </View>
       </View>
       <ScrollView style={styles.popUpBody}>
@@ -64,7 +75,7 @@ export default PopUp;
 
 const styles = StyleSheet.create({
   headerTextView: {
-    backgroundColor: "lightgreen",
+    height: 50,
   },
 
   headerText: {
@@ -74,14 +85,12 @@ const styles = StyleSheet.create({
   },
 
   buttonView: {
-    backgroundColor: "lightblue",
-    height: 35,
+    height: 50,
     alignSelf: "stretch",
-  },
-
-  button: {
-    backgroundColor: Colors.light.background,
-    size: 35,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
 
   icon: {

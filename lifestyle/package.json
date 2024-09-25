@@ -1,5 +1,5 @@
 {
-  "name": "test_build",
+  "name": "lifestyle",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
+    "@ant-design/icons-react-native": "^2.3.2",
     "@expo/metro-runtime": "~3.2.3",
     "@expo/vector-icons": "^14.0.3",
     "expo": "~51.0.28",
