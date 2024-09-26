@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView, TextInput, Alert, FlatList } from "react-native";
 import HorizontalRule from "./HotizontalRule";
 import { useState, useEffect } from "react";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import ButtonBar from "./ButtonBar";
+import CheckItem from "./CheckItem";
 
 
 const PopUp = ({ name, type }) => {
@@ -32,22 +32,24 @@ const PopUp = ({ name, type }) => {
     },
   ]);
 
-  const EditItem = (listName, i) => {
-   
-  }
+  // const editItem = (itemName, i, j, input) => {
+  //   // Alert.alert(input)
+  //   // Alert.alert(JSON.stringify(toDoList[i].items[j]["name"]))
+  //   var updatedList = toDoList;
+  //   updatedList[i].items[j]["name"] = input;
+  //   console.log(updatedList)
+  //   setToDoList(updatedList);
+  //   console.log(toDoList)
+  // }
 
-  const createNewItem = (listName, i) => {
-    newItem = {
-      name: "",
-      completed: false,
-    }
+  // const createNewItem = (listName, i) => {
+  //   newItem = {
+  //     name: "",
+  //     completed: false,
+  //   }
 
     // setToDoList(toDoList[i].items.push(newItem))
-  }
-
-  // useEffect(() => {
-
-  // }, [toDoList])
+  // }
 
   return (
     <View style={styles.popUp}>
@@ -69,20 +71,11 @@ const PopUp = ({ name, type }) => {
 
               <FlatList
                 data={list.items}
-                renderItem={({item}) => {
+                renderItem={({ item, index }) => {
+                  console.log("idx" + index)
                   return (
-                    <View style={styles.listItemView}>
-                      <View style={styles.listBoxView}>
-                        {type==="checklist" && <BouncyCheckbox fillColor="#9342f5" />}
-                      </View>
-                      <TextInput
-                        style={{}}
-                        value={item.name}
-                        onChangeText={() => {editText(i, item.name)}}
-                        // onSubmitEditing={() => {createNewItem(list.name, i)}}
-                      />
-                    </View>
-                  );
+                  <CheckItem text={item.name}/>
+                  )
                 }}
               />
               {!isLast && <HorizontalRule />}
