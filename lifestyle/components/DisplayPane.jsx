@@ -30,7 +30,7 @@ import CheckItem from "./CheckItem";
 // ]
 
 
-const PopUp = ({ name, type }) => {
+const DisplayPane = ({ name, type }) => {
   const [toDoList, setToDoList] = useState(
        [ 
         {
