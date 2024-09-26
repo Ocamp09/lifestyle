@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import CheckItem from "./CheckItem";
+import { Colors } from "../constants/Colors";
 
 // [
 //   {
@@ -45,8 +46,8 @@ const DisplayPane = ({ name, type }) => {
   );
 
   return (
-    <View style={styles.popUp}>
-      <View style={styles.popUpHeader}>
+    <View style={styles.DisplayPane}>
+      <View style={styles.DisplayPaneHeader}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
         </View>
@@ -54,7 +55,7 @@ const DisplayPane = ({ name, type }) => {
       </View>
       {/* End of header view */}
       {/* Start of body view */}
-      <View style={styles.popUpBody}>
+      <View style={styles.DisplayPaneBody}>
         {/* {toDoList.map((list, i) => {
           const isLast = toDoList.length - 1 === i;
           return (
@@ -67,7 +68,12 @@ const DisplayPane = ({ name, type }) => {
                 data={toDoList}
                 renderItem={({ item, index }) => {
                   return (
-                  <CheckItem text={item.name} setCurrList={setToDoList} currList={toDoList} index={index}/>
+                  <CheckItem 
+                    text={item.name} 
+                    setCurrList={setToDoList} 
+                    currList={toDoList} 
+                    index={index}
+                  />
                   )
                 }}
               />
@@ -81,7 +87,7 @@ const DisplayPane = ({ name, type }) => {
   );
 };
 
-export default PopUp;
+export default DisplayPane;
 
 const styles = StyleSheet.create({
   headerTextView: {
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    color: "black",
+    color: Colors.dark.text,
     fontWeight: "bold",
     fontSize: 35,
   },
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingBottom: 5
+    paddingBottom: 5,
   },
 
   listTextView: {
@@ -125,23 +131,22 @@ const styles = StyleSheet.create({
     borderColor: "black"
   },
 
-  popUp: {
+  DisplayPane: {
     alignSelf: "stretch",
     paddingBottom: 30,
   },
 
-  popUpHeader: {
+  DisplayPaneHeader: {
     alignSelf: "stretch",
     paddingBottom: 5,
     flexDirection: "row",
     alignItems: "flex-start",
   },
 
-  popUpBody: {
-    backgroundColor: "lightgrey",
+  DisplayPaneBody: {
+    backgroundColor: Colors.dark.tint,
     alignSelf: "stretch",
-    borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     paddingLeft: 25,
     paddingRight: 25,
     paddingTop: 10,

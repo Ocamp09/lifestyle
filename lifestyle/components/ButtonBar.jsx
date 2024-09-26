@@ -1,6 +1,7 @@
 import { View, StyleSheet, Pressable } from "react-native";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "../constants/Colors";
 
 
 const ButtonBar = ({currList, setCurrList}) => {
@@ -23,7 +24,7 @@ return (
                 onPress={appendNewItem}
                 style={{paddingRight:10}}
             >
-                <AntDesign name="pluscircleo" size={36} color="black" />
+                <AntDesign name="pluscircle" size={36} color="#9342f5" />
             </Pressable>
             {/* <Pressable
                 onPress={() => {

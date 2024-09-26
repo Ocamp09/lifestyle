@@ -1,8 +1,9 @@
 import { View, StyleSheet, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { Colors } from "../constants/Colors";
 
-const CheckItem = ({text, setCurrList, currList, index}) => {
+const CheckItem = ({ text, setCurrList, currList, index }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [displayText, setDisplayText] = useState(text);
 
@@ -38,20 +39,21 @@ const CheckItem = ({text, setCurrList, currList, index}) => {
     }
 
     useEffect(() => {
-        setDisplayText(text); // Update displayText if text prop changes
+        setDisplayText(text);
     }, [text]);
     
     return (
         <View style={styles.listItemView}>
-          <View style={styles.listBoxView}>
-            <BouncyCheckbox fillColor="#9342f5" onPress={checkItem} isChecked={isChecked}/>
-          </View>
-          <TextInput
-            style={{textDecorationLine: isChecked ? "line-through": "none"}}
-            value={displayText}
-            onChangeText={(input) => {editItem(input)}}
-            onSubmitEditing={newItem}
-          />
+            <View style={styles.listBoxView}>
+                <BouncyCheckbox fillColor="#9342f5" onPress={checkItem} isChecked={isChecked}/>
+            </View>
+            <TextInput
+                style={[styles.text, {textDecorationLine: isChecked ? "line-through": "none"}]}
+                value={displayText}
+                onChangeText={(input) => {editItem(input)}}
+                onSubmitEditing={newItem}
+                selectionColor={Colors.dark.primary}
+            />
         </View>
       );
 }
@@ -64,13 +66,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingBottom: 5
+        paddingBottom: 5,
       },
     
       listBoxView: {
-        width: "100"
+        width: "100",
       },
 
       text: {
+        color: Colors.dark.text,
+        fontSize: 16, 
+        flex: 1,
+        alignSelf: "stretch",
       }
 });
