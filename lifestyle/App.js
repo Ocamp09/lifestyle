@@ -1,4 +1,4 @@
-import PopUp from "./components/PopUp";
+import PopUp from "./components/DisplayPane";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 

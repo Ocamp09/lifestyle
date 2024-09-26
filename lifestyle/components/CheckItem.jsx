@@ -1,13 +1,20 @@
 import { View, StyleSheet, TextInput } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const CheckItem = ({text, setCurrList, currList, index}) => {
     const [isChecked, setIsChecked] = useState(false);
+    const [displayText, setDisplayText] = useState(text);
 
     const editItem = (input) => {
+        if (input === "") {
+            console.log("empty")
+            console.log(isChecked)
+            setIsChecked(false);
+        }
         var update = currList;
         update[index].name = input;
+        setDisplayText(input);
         setCurrList(update);
     }
 
@@ -20,26 +27,28 @@ const CheckItem = ({text, setCurrList, currList, index}) => {
     }
 
     const newItem = () => {
-        var newItem = {
+        const newItem = {
             name: "",
-        completed: false,
-        }
+            completed: false,
+        };
 
-        var update = currList;
+        var update = [...currList];
         update.splice(index + 1, 0, newItem);
-        console.log("update", update)
         setCurrList(update);
-        console.log("added: ", currList)
     }
+
+    useEffect(() => {
+        setDisplayText(text); // Update displayText if text prop changes
+    }, [text]);
     
     return (
         <View style={styles.listItemView}>
           <View style={styles.listBoxView}>
-            <BouncyCheckbox fillColor="#9342f5" onPress={checkItem}/>
+            <BouncyCheckbox fillColor="#9342f5" onPress={checkItem} isChecked={isChecked}/>
           </View>
           <TextInput
             style={{textDecorationLine: isChecked ? "line-through": "none"}}
-            defaultValue={text}
+            value={displayText}
             onChangeText={(input) => {editItem(input)}}
             onSubmitEditing={newItem}
           />

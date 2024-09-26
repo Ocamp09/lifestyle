@@ -6,16 +6,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const ButtonBar = ({currList, setCurrList}) => {
 
     const appendNewItem = () => {
-        var newItem = {
+        const newItem = {
           name: "",
           completed: false,
         }
     
-        var update = currList;
+        var update = [...currList];
         update.push(newItem);
     
         setCurrList(update)
-        console.log(currList);
     }
 
 return (
@@ -26,13 +25,13 @@ return (
             >
                 <AntDesign name="pluscircleo" size={36} color="black" />
             </Pressable>
-            <Pressable
+            {/* <Pressable
                 onPress={() => {
                 console.log("press");
                 }}
             >
                 <MaterialCommunityIcons name="dots-horizontal-circle-outline" size={42} color="black" />
-            </Pressable>
+            </Pressable> */}
     </View>
 );
 }

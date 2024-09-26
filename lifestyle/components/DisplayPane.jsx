@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput, Alert, FlatList } from "react-native";
-import HorizontalRule from "./HotizontalRule";
-import { useState, useEffect } from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import CheckItem from "./CheckItem";
 
@@ -67,7 +66,6 @@ const PopUp = ({ name, type }) => {
                 // data={list.items}
                 data={toDoList}
                 renderItem={({ item, index }) => {
-                  console.log("idx" + index)
                   return (
                   <CheckItem text={item.name} setCurrList={setToDoList} currList={toDoList} index={index}/>
                   )
