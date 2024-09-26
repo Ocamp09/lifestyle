@@ -1,13 +1,17 @@
-import PopUp from "./components/PopUp";
+import DisplayPane from "./components/DisplayPane";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
+import { Colors } from "./constants/Colors";
+import CustomStatusBar from "./components/StatusBar";
 
 export default function App() {
   return (
-    <View style={styles.mainView}>
-      <PopUp name="To-Do" />
-      <PopUp name="Routines" />
-    </View>
+    <CustomStatusBar>
+    <ScrollView style={styles.mainView} contentContainerStyle={{flex:1}}>
+      <DisplayPane name="To-Do" type="checklist"/>
+      {/* <DisplayPane name="Routines" /> */}
+    </ScrollView>
+    </CustomStatusBar>
   );
 }
 
@@ -15,9 +19,14 @@ const styles = StyleSheet.create({
   mainView: {
     paddingLeft: 25,
     paddingRight: 25,
-    paddingTop: 15,
+    paddingTop: 0,
     marginTop: 50,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.dark.background,
+    height: "auto"
   },
+
+  statusBar: {
+    backgroundColor: Colors.dark.background,
+  },  
 });
 
