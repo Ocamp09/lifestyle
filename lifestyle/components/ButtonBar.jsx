@@ -3,14 +3,25 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
-const ButtonBar = () => {
+const ButtonBar = ({currList, setCurrList}) => {
+
+    const appendNewItem = () => {
+        var newItem = {
+          name: "",
+          completed: false,
+        }
+    
+        var update = currList;
+        update.push(newItem);
+    
+        setCurrList(update)
+        console.log(currList);
+    }
 
 return (
     <View style={styles.buttonView}>
             <Pressable
-                onPress={() => {
-                console.log("press");
-                }}
+                onPress={appendNewItem}
                 style={{paddingRight:10}}
             >
                 <AntDesign name="pluscircleo" size={36} color="black" />

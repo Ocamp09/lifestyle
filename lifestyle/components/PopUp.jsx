@@ -5,12 +5,35 @@ import { useState, useEffect } from "react";
 import ButtonBar from "./ButtonBar";
 import CheckItem from "./CheckItem";
 
+// [
+//   {
+//     name: "List Name",
+//     items: [
+//       {
+//         name: "First item",
+//         completed: false,
+//       },
+//       {
+//         name: "Second item",
+//         completed: false,
+//       },
+//     ],
+//   },
+//   {
+//     name: "List Name 2",
+//     items: [
+//       {
+//         name: "First item 2",
+//         completed: false,
+//       },
+//     ],
+//   },
+// ]
+
 
 const PopUp = ({ name, type }) => {
-  const [toDoList, setToDoList] = useState([
-    {
-      name: "List Name",
-      items: [
+  const [toDoList, setToDoList] = useState(
+       [ 
         {
           name: "First item",
           completed: false,
@@ -19,37 +42,8 @@ const PopUp = ({ name, type }) => {
           name: "Second item",
           completed: false,
         },
-      ],
-    },
-    {
-      name: "List Name 2",
-      items: [
-        {
-          name: "First item 2",
-          completed: false,
-        },
-      ],
-    },
-  ]);
-
-  // const editItem = (itemName, i, j, input) => {
-  //   // Alert.alert(input)
-  //   // Alert.alert(JSON.stringify(toDoList[i].items[j]["name"]))
-  //   var updatedList = toDoList;
-  //   updatedList[i].items[j]["name"] = input;
-  //   console.log(updatedList)
-  //   setToDoList(updatedList);
-  //   console.log(toDoList)
-  // }
-
-  // const createNewItem = (listName, i) => {
-  //   newItem = {
-  //     name: "",
-  //     completed: false,
-  //   }
-
-    // setToDoList(toDoList[i].items.push(newItem))
-  // }
+      ]
+  );
 
   return (
     <View style={styles.popUp}>
@@ -57,32 +51,33 @@ const PopUp = ({ name, type }) => {
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
         </View>
-        <ButtonBar/>
+        <ButtonBar currList={toDoList} setCurrList={setToDoList}/>
       </View>
       {/* End of header view */}
       {/* Start of body view */}
       <View style={styles.popUpBody}>
-        {toDoList.map((list, i) => {
+        {/* {toDoList.map((list, i) => {
           const isLast = toDoList.length - 1 === i;
           return (
             <View key={i}>
               <Text key={"1" + i}>{list.name}</Text>
-              <View >
+              <View > */}
 
               <FlatList
-                data={list.items}
+                // data={list.items}
+                data={toDoList}
                 renderItem={({ item, index }) => {
                   console.log("idx" + index)
                   return (
-                  <CheckItem text={item.name}/>
+                  <CheckItem text={item.name} setCurrList={setToDoList} currList={toDoList} index={index}/>
                   )
                 }}
               />
-              {!isLast && <HorizontalRule />}
+              {/* {!isLast && <HorizontalRule />}
               </View>
             </View>
           );
-        })}
+        })} */}
       </View>
     </View>
   );
