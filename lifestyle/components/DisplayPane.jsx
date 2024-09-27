@@ -1,48 +1,37 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import CheckItem from "./CheckItem";
 import { Colors } from "../constants/Colors";
-
-// [
-//   {
-//     name: "List Name",
-//     items: [
-//       {
-//         name: "First item",
-//         completed: false,
-//       },
-//       {
-//         name: "Second item",
-//         completed: false,
-//       },
-//     ],
-//   },
-//   {
-//     name: "List Name 2",
-//     items: [
-//       {
-//         name: "First item 2",
-//         completed: false,
-//       },
-//     ],
-//   },
-// ]
-
+import HorizontalRule from "./HotizontalRule";
 
 const DisplayPane = ({ name, type }) => {
   const [toDoList, setToDoList] = useState(
-       [ 
-        {
-          name: "First item",
-          completed: false,
-        },
-        {
-          name: "Second item",
-          completed: false,
-        },
-      ]
+    [
+      {
+        name: "List Name",
+        items: [
+          {
+            name: "First item",
+            completed: false,
+          },
+          {
+            name: "Second item",
+            completed: false,
+          },
+        ],
+      },
+      {
+        name: "List Name 2",
+        items: [
+          {
+            name: "First item 2",
+            completed: false,
+          },
+        ],
+      },
+    ]
   );
 
   return (
@@ -56,12 +45,16 @@ const DisplayPane = ({ name, type }) => {
       {/* End of header view */}
       {/* Start of body view */}
       <View style={styles.DisplayPaneBody}>
-        {/* {toDoList.map((list, i) => {
+        {toDoList.map((list, i) => {
           const isLast = toDoList.length - 1 === i;
           return (
             <View key={i}>
-              <Text key={"1" + i}>{list.name}</Text>
-              <View > */}
+              <TextInput 
+                key={"1" + i} 
+                style={[styles.listNameText, , { outline: "none" }]} 
+                value={list.name}
+              />
+              <View >
 
               <FlatList
                 // data={list.items}
@@ -79,11 +72,11 @@ const DisplayPane = ({ name, type }) => {
                   )
                 }}
               />
-              {/* {!isLast && <HorizontalRule />}
+              {!isLast && <HorizontalRule />}
               </View>
             </View>
           );
-        })} */}
+        })}
       </View>
     </View>
   );
@@ -97,7 +90,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    color: Colors.dark.text,
+    color: Colors.dark.primary,
     fontWeight: "bold",
     fontSize: 35,
   },
@@ -109,6 +102,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end"
+  },
+
+  listNameText: {
+    color: Colors.dark.text,
+    fontWeight: "bold",
+    fontSize: 25,
   },
 
   listItemView: {
