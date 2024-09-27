@@ -8,13 +8,20 @@ const ButtonBar = ({currList, setCurrList}) => {
 
     const appendNewItem = () => {
         const newItem = {
-          name: "",
-          completed: false,
+          name: "List",
+          items: [
+            { 
+                name: "",
+                completed: false,
+            },
+          ]
         }
-    
+        
+        console.log("curr", currList)
         var update = [...currList];
         update.push(newItem);
-    
+        console.log(update);
+
         setCurrList(update)
     }
 

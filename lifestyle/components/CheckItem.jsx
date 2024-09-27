@@ -5,7 +5,7 @@ import { Colors } from "../constants/Colors";
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const CheckItem = ({ text, setCurrList, currList, index }) => {
+const CheckItem = ({ text, setCurrList, currList, index, i }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [displayText, setDisplayText] = useState(text);
 
@@ -13,12 +13,12 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
 
     const deleteItem = () => {
         var update = [...currList];
-        update.splice(index, 1);
+        update[i].items.splice(index, 1);
         setCurrList(update);
     }
 
     const deleteRow = (key) => {
-        if (key === "Backspace" && displayText === "") {
+        if (key === "Backspace" && displayText === "" && currList[i].items.length !== 1) {
             deleteItem()
         }
     }
@@ -29,15 +29,15 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         }
 
         var update = currList;
-        update[index].name = input;
+        update[i].items[index].name = input;
         setDisplayText(input);
         setCurrList(update);
     }
 
     const checkItem = () => {
-        var update = currList;
+        var update = [...currList];
 
-        update[index].completed = !isChecked;
+        update[i].completed = !isChecked;
         setCurrList(update);
         setIsChecked(!isChecked);
     }
@@ -46,10 +46,11 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         const newItem = {
             name: "",
             completed: false,
-        };
+        }
 
         var update = [...currList];
-        update.splice(index + 1, 0, newItem);
+        console.log("update at", update[i].items);
+        update[i].items.splice(index + 1, 0, newItem);
         setCurrList(update);
     }
 

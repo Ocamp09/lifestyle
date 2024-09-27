@@ -2,11 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
-import CheckItem from "./CheckItem";
 import { Colors } from "../constants/Colors";
 import HorizontalRule from "./HotizontalRule";
+import CheckItem from "./CheckItem";
 
-const DisplayPane = ({ name, type }) => {
+
+
+const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState(
     [
       {
@@ -46,38 +48,39 @@ const DisplayPane = ({ name, type }) => {
       {/* Start of body view */}
       <View style={styles.DisplayPaneBody}>
         {toDoList.map((list, i) => {
-          const isLast = toDoList.length - 1 === i;
-          return (
-            <View key={i}>
-              <TextInput 
-                key={"1" + i} 
-                style={[styles.listNameText, , { outline: "none" }]} 
-                value={list.name}
-              />
-              <View >
+                const isLast = toDoList.length - 1 === i;
+                return (
+                    <View key={i}>
+                        <TextInput 
+                            key={"1" + i} 
+                            style={[styles.listNameText, , { outline: "none" }]} 
+                            value={list.name}
+                        />
+                        <View >
 
-              <FlatList
-                // data={list.items}
-                scrollEnabled={false}
-                data={toDoList}
-                renderItem={({ item, index }) => {
-                  return (
-                  <CheckItem 
-                    key={index}
-                    text={item.name} 
-                    setCurrList={setToDoList} 
-                    currList={toDoList} 
-                    index={index}
-                  />
-                  )
-                }}
-              />
-              {!isLast && <HorizontalRule />}
-              </View>
-            </View>
-          );
-        })}
-      </View>
+                        <FlatList
+                            // data={list.items}
+                            scrollEnabled={false}
+                            data={list.items}
+                            renderItem={({ item, index }) => {
+                            return (
+                            <CheckItem 
+                                key={index}
+                                text={item.name} 
+                                setCurrList={setToDoList} 
+                                currList={toDoList} 
+                                index={index}
+                                i={i}
+                            />
+                            )
+                            }}
+                        />
+                        {!isLast && <HorizontalRule />}
+                        </View>
+                    </View>
+                );
+            })}     
+        </View>
     </View>
   );
 };
@@ -104,12 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
 
-  listNameText: {
-    color: Colors.dark.text,
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-
   listItemView: {
     flex: 1,
     flexDirection: "row",
@@ -127,6 +124,12 @@ const styles = StyleSheet.create({
   listBoxView: {
     width: "100"
   },
+
+  listNameText: {
+    color: Colors.dark.text,
+    fontWeight: "bold",
+    fontSize: 25,
+  },  
 
   checkBoxColor: {
     borderColor: "black"
