@@ -5,36 +5,33 @@ import ButtonBar from "./ButtonBar";
 import { Colors } from "../constants/Colors";
 import HorizontalRule from "./HotizontalRule";
 import CheckItem from "./CheckItem";
-
-
+import ListName from "./ListName";
 
 const DisplayPane = ({ name }) => {
-  const [toDoList, setToDoList] = useState(
-    [
-      {
-        name: "List Name",
-        items: [
-          {
-            name: "First item",
-            completed: false,
-          },
-          {
-            name: "Second item",
-            completed: false,
-          },
-        ],
-      },
-      {
-        name: "List Name 2",
-        items: [
-          {
-            name: "First item 2",
-            completed: false,
-          },
-        ],
-      },
-    ]
-  );
+  const [toDoList, setToDoList] = useState([
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
+          completed: false,
+        },
+      ],
+    },
+    {
+      name: "List Name 2",
+      items: [
+        {
+          name: "First item 2",
+          completed: false,
+        },
+      ],
+    },
+  ]);
 
   return (
     <View style={styles.DisplayPane}>
@@ -42,45 +39,53 @@ const DisplayPane = ({ name }) => {
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
         </View>
-        <ButtonBar currList={toDoList} setCurrList={setToDoList}/>
+        <ButtonBar currList={toDoList} setCurrList={setToDoList} />
       </View>
       {/* End of header view */}
       {/* Start of body view */}
       <View style={styles.DisplayPaneBody}>
-        {toDoList.map((list, i) => {
+        {/* {toDoList.map((list, i) => {
                 const isLast = toDoList.length - 1 === i;
-                return (
-                    <View key={i}>
-                        <TextInput 
-                            key={"1" + i} 
-                            style={[styles.listNameText, , { outline: "none" }]} 
-                            value={list.name}
+                return ( */}
+        <FlatList
+          scrollEnabled={false}
+          data={toDoList}
+          renderItem={({ item, index }) => {
+            const isLast = toDoList.length - 1 === index;
+            const i = index;
+            return (
+              <View key={index}>
+                <ListName
+                  name={item.name}
+                  list={toDoList}
+                  setList={setToDoList}
+                  index={index}
+                />
+                <View>
+                  <FlatList
+                    scrollEnabled={false}
+                    data={item.items}
+                    renderItem={({ item, index }) => {
+                      return (
+                        <CheckItem
+                          key={index}
+                          text={item.name}
+                          setCurrList={setToDoList}
+                          currList={toDoList}
+                          index={index}
+                          i={i}
                         />
-                        <View >
-
-                        <FlatList
-                            // data={list.items}
-                            scrollEnabled={false}
-                            data={list.items}
-                            renderItem={({ item, index }) => {
-                            return (
-                            <CheckItem 
-                                key={index}
-                                text={item.name} 
-                                setCurrList={setToDoList} 
-                                currList={toDoList} 
-                                index={index}
-                                i={i}
-                            />
-                            )
-                            }}
-                        />
-                        {!isLast && <HorizontalRule />}
-                        </View>
-                    </View>
-                );
-            })}     
-        </View>
+                      );
+                    }}
+                  />
+                  {!isLast && <HorizontalRule />}
+                </View>
+              </View>
+            );
+          }}
+        />
+        {/* })}      */}
+      </View>
     </View>
   );
 };
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
 
   listItemView: {
@@ -122,17 +127,17 @@ const styles = StyleSheet.create({
   },
 
   listBoxView: {
-    width: "100"
+    width: "100",
   },
 
   listNameText: {
     color: Colors.dark.text,
     fontWeight: "bold",
     fontSize: 25,
-  },  
+  },
 
   checkBoxColor: {
-    borderColor: "black"
+    borderColor: "black",
   },
 
   DisplayPane: {
