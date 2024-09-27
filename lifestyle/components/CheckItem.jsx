@@ -1,5 +1,5 @@
 import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Colors } from "../constants/Colors";
 import Swipeable from 'react-native-gesture-handler/Swipeable'
@@ -8,7 +8,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const CheckItem = ({ text, setCurrList, currList, index }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [displayText, setDisplayText] = useState(text);
-    const [resetDelete, setResetDelete] = useState(false);
+
+    const swipeableRef = useRef(null);
 
     const deleteItem = () => {
         var update = [...currList];
@@ -16,15 +17,17 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         setCurrList(update);
     }
 
+    const deleteRow = (key) => {
+        if (key === "Backspace" && displayText === "") {
+            deleteItem()
+        }
+    }
+
     const editItem = (input) => {
         if (input === "") {
-            if (displayText.length <= 1) {
-                deleteItem();
-            }
-
             setIsChecked(false);
-            return
         }
+
         var update = currList;
         update[index].name = input;
         setDisplayText(input);
@@ -65,21 +68,13 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
           )
     }
 
-    const rightSwipeReset = () => {
-        return (
-            <View></View>
-        )
-    }
-
-
-      const rightSwipeActions = () => {
-        return resetDelete === true ? rightSwipeReset() : rightSwipeDelete();
-      }
+    const rightSwipeActions = () => {
+        return currList[index] ? rightSwipeDelete() : <View />;
+      };
     
       const swipeFromRightOpen = () => {
         deleteItem();
-        setResetDelete(true);
-        rightSwipeActions();
+        swipeableRef.current?.close();
       }
 
     useEffect(() => {
@@ -92,18 +87,20 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         onSwipeableOpen={(direction) => {
           direction === 'left' ? swipeFromLeftOpen() : swipeFromRightOpen()
         }}
-        rightThreshold={30}
+        rightThreshold={25}
+        ref={swipeableRef}
       >
             <View style={styles.listItemView}>
                 <View style={styles.listBoxView}>
                     <BouncyCheckbox fillColor="#9342f5" onPress={checkItem} isChecked={isChecked}/>
                 </View>
                 <TextInput
-                    style={[styles.text, {textDecorationLine: isChecked ? "line-through": "none"}]}
+                    style={[styles.text, {textDecorationLine: isChecked ? "line-through": "none"}, { outline: "none" }]}
                     value={displayText}
                     onChangeText={(input) => {editItem(input)}}
                     onSubmitEditing={newItem}
                     selectionColor={Colors.dark.primary}
+                    onKeyPress={(event) => {deleteRow(event.nativeEvent.key)}}
                 />
             </View>
         </Swipeable>

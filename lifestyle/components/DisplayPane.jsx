@@ -70,6 +70,7 @@ const DisplayPane = ({ name, type }) => {
                 renderItem={({ item, index }) => {
                   return (
                   <CheckItem 
+                    key={index}
                     text={item.name} 
                     setCurrList={setToDoList} 
                     currList={toDoList} 
