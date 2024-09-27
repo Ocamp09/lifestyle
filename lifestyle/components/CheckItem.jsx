@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Colors } from "../constants/Colors";
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const CheckItem = ({ text, setCurrList, currList, index }) => {
     const [isChecked, setIsChecked] = useState(false);
@@ -54,21 +54,13 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         return (
             <View
               style={{
-                backgroundColor: '#dd2150',
+                // backgroundColor: '#dd2150',
                 justifyContent: 'center',
                 alignItems: 'flex-end',
               }}
             >
-              <Text
-                style={{
-                  color: '#fff',
-                  paddingHorizontal: 5,
-                  fontWeight: '600',
-                  padding: 20,
-                }}
-              >
-                Del
-              </Text>
+                <MaterialCommunityIcons name="trash-can-outline" size={24} color="#dd2150" />
+            
             </View>
           )
     }
