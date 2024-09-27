@@ -65,6 +65,7 @@ const DisplayPane = ({ name, type }) => {
 
               <FlatList
                 // data={list.items}
+                scrollEnabled={false}
                 data={toDoList}
                 renderItem={({ item, index }) => {
                   return (

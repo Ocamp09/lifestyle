@@ -8,6 +8,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 const CheckItem = ({ text, setCurrList, currList, index }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [displayText, setDisplayText] = useState(text);
+    const [resetDelete, setResetDelete] = useState(false);
 
     const deleteItem = () => {
         var update = [...currList];
@@ -16,17 +17,12 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
     }
 
     const editItem = (input) => {
-        console.log("in", input)
         if (input === "") {
-            console.log("display", displayText)
             if (displayText.length <= 1) {
                 deleteItem();
             }
 
-            console.log("empty")
-            console.log(isChecked)
             setIsChecked(false);
-
             return
         }
         var update = currList;
@@ -54,32 +50,44 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         setCurrList(update);
     }
 
-
-      const rightSwipeActions = () => {
+    const rightSwipeDelete = () => {
         return (
-          <View
-            style={{
-              backgroundColor: '#dd2150',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-            }}
-          >
-            <Text
+            <View
               style={{
-                color: '#fff',
-                paddingHorizontal: 10,
-                fontWeight: '600',
-                padding: 30,
+                backgroundColor: '#dd2150',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
               }}
             >
-              Delete
-            </Text>
-          </View>
+              <Text
+                style={{
+                  color: '#fff',
+                  paddingHorizontal: 5,
+                  fontWeight: '600',
+                  padding: 20,
+                }}
+              >
+                Del
+              </Text>
+            </View>
+          )
+    }
+
+    const rightSwipeReset = () => {
+        return (
+            <View></View>
         )
+    }
+
+
+      const rightSwipeActions = () => {
+        return resetDelete === true ? rightSwipeReset() : rightSwipeDelete();
       }
     
       const swipeFromRightOpen = () => {
-        Alert.alert('Swipe from right')
+        deleteItem();
+        setResetDelete(true);
+        rightSwipeActions();
       }
 
     useEffect(() => {
@@ -90,9 +98,9 @@ const CheckItem = ({ text, setCurrList, currList, index }) => {
         <Swipeable
         renderRightActions={rightSwipeActions}
         onSwipeableOpen={(direction) => {
-          console.log(direction) // "left" | "right"
           direction === 'left' ? swipeFromLeftOpen() : swipeFromRightOpen()
         }}
+        rightThreshold={30}
       >
             <View style={styles.listItemView}>
                 <View style={styles.listBoxView}>
@@ -119,10 +127,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         paddingBottom: 5,
-      },
-    
-      listBoxView: {
-        width: "100",
+        paddingTop: 5,
       },
 
       text: {
