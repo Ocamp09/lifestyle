@@ -1,11 +1,4 @@
-import {
-  TextInput,
-  StyleSheet,
-  Pressable,
-  Alert,
-  View,
-  Text,
-} from "react-native";
+import { StyleSheet, Pressable, View, Text } from "react-native";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
 
@@ -39,14 +32,5 @@ const styles = StyleSheet.create({
     color: Colors.dark.text,
     fontWeight: "bold",
     fontSize: 25,
-  },
-
-  menu: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-    flexDirection: "column",
   },
 });

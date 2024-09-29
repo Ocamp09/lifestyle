@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import { Colors } from "../constants/Colors";
-import HorizontalRule from "./HotizontalRule";
+import HorizontalRule from "./styling/HotizontalRule";
 import CheckItem from "./CheckItem";
 import ListName from "./ListName";
 import OptionMenu from "./OptionMenu";
@@ -32,58 +32,6 @@ const DisplayPane = ({ name }) => {
         },
       ],
     },
-    {
-      name: "List Name",
-      items: [
-        {
-          name: "First item",
-          completed: false,
-        },
-        {
-          name: "Second item",
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "List Name",
-      items: [
-        {
-          name: "First item",
-          completed: false,
-        },
-        {
-          name: "Second item",
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "List Name",
-      items: [
-        {
-          name: "First item",
-          completed: false,
-        },
-        {
-          name: "Second item",
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "List Name",
-      items: [
-        {
-          name: "First item",
-          completed: false,
-        },
-        {
-          name: "Second item",
-          completed: false,
-        },
-      ],
-    },
   ]);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -96,8 +44,6 @@ const DisplayPane = ({ name }) => {
         </View>
         <ButtonBar currList={toDoList} setCurrList={setToDoList} />
       </View>
-      {/* End of header view */}
-      {/* Start of body view */}
       <View style={styles.DisplayPaneBody}>
         <FlatList
           scrollEnabled={false}
@@ -137,7 +83,6 @@ const DisplayPane = ({ name }) => {
             );
           }}
         />
-        {/* })}      */}
       </View>
     </View>
   );
@@ -154,43 +99,6 @@ const styles = StyleSheet.create({
     color: Colors.dark.primary,
     fontWeight: "bold",
     fontSize: 35,
-  },
-
-  buttonView: {
-    height: 50,
-    alignSelf: "stretch",
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-
-  listItemView: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingBottom: 5,
-  },
-
-  listTextView: {
-    alignSelf: "stretch",
-    flex: 1,
-    justifyContent: "center",
-  },
-
-  listBoxView: {
-    width: "100",
-  },
-
-  listNameText: {
-    color: Colors.dark.text,
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-
-  checkBoxColor: {
-    borderColor: "black",
   },
 
   DisplayPane: {

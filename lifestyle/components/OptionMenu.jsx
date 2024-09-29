@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from "react-native";
 import { Colors } from "../constants/Colors";
-import HorizontalRule from "./HotizontalRule";
+import HorizontalRule from "./styling/HotizontalRule";
 
 const OptionMenu = () => {
   return (
