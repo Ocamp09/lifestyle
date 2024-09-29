@@ -6,6 +6,7 @@ import { Colors } from "../constants/Colors";
 import HorizontalRule from "./HotizontalRule";
 import CheckItem from "./CheckItem";
 import ListName from "./ListName";
+import OptionMenu from "./OptionMenu";
 
 const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -31,10 +32,64 @@ const DisplayPane = ({ name }) => {
         },
       ],
     },
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
+          completed: false,
+        },
+      ],
+    },
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
+          completed: false,
+        },
+      ],
+    },
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
+          completed: false,
+        },
+      ],
+    },
+    {
+      name: "List Name",
+      items: [
+        {
+          name: "First item",
+          completed: false,
+        },
+        {
+          name: "Second item",
+          completed: false,
+        },
+      ],
+    },
   ]);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <View style={styles.DisplayPane}>
+      {showMenu && <OptionMenu />}
       <View style={styles.DisplayPaneHeader}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
@@ -44,9 +99,6 @@ const DisplayPane = ({ name }) => {
       {/* End of header view */}
       {/* Start of body view */}
       <View style={styles.DisplayPaneBody}>
-        {/* {toDoList.map((list, i) => {
-                const isLast = toDoList.length - 1 === i;
-                return ( */}
         <FlatList
           scrollEnabled={false}
           data={toDoList}
@@ -60,6 +112,7 @@ const DisplayPane = ({ name }) => {
                   list={toDoList}
                   setList={setToDoList}
                   index={index}
+                  setMenuTrigger={setShowMenu}
                 />
                 <View>
                   <FlatList

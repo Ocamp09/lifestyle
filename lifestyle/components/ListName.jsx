@@ -1,8 +1,15 @@
-import { TextInput, StyleSheet } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Alert,
+  View,
+  Text,
+} from "react-native";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
 
-const ListName = ({ name, list, setList, index }) => {
+const ListName = ({ name, list, setList, index, setMenuTrigger }) => {
   const [displayListName, setDisplayListName] = useState(name);
 
   const changeListName = (input) => {
@@ -13,14 +20,15 @@ const ListName = ({ name, list, setList, index }) => {
   };
 
   return (
-    <TextInput
-      key={"1" + index}
-      style={[styles.listNameText, { outline: "none" }]}
-      value={displayListName}
-      onChangeText={(input) => {
-        changeListName(input);
-      }}
-    />
+    <View>
+      <Pressable
+        onLongPress={() => {
+          setMenuTrigger(true);
+        }}
+      >
+        <Text style={styles.listNameText}>{displayListName}</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -31,5 +39,14 @@ const styles = StyleSheet.create({
     color: Colors.dark.text,
     fontWeight: "bold",
     fontSize: 25,
+  },
+
+  menu: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30,
+    flexDirection: "column",
   },
 });
