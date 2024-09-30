@@ -52,7 +52,6 @@ const CheckItem = ({ text, setCurrList, currList, index, i }) => {
     };
 
     var update = [...currList];
-    console.log("update at", update[i].items);
     update[i].items.splice(index + 1, 0, newItem);
     setCurrList(update);
   };

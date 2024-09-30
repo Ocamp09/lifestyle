@@ -3,10 +3,8 @@ import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import { Colors } from "../constants/Colors";
-import HorizontalRule from "./styling/HotizontalRule";
-import CheckItem from "./CheckItem";
-import ListName from "./ListName";
 import OptionMenu from "./OptionMenu";
+import ListItem from "./ListItem";
 
 const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -52,34 +50,14 @@ const DisplayPane = ({ name }) => {
             const isLast = toDoList.length - 1 === index;
             const i = index;
             return (
-              <View key={index}>
-                <ListName
-                  name={item.name}
-                  list={toDoList}
-                  setList={setToDoList}
-                  index={index}
-                  setMenuTrigger={setShowMenu}
-                />
-                <View>
-                  <FlatList
-                    scrollEnabled={false}
-                    data={item.items}
-                    renderItem={({ item, index }) => {
-                      return (
-                        <CheckItem
-                          key={index}
-                          text={item.name}
-                          setCurrList={setToDoList}
-                          currList={toDoList}
-                          index={index}
-                          i={i}
-                        />
-                      );
-                    }}
-                  />
-                  {!isLast && <HorizontalRule />}
-                </View>
-              </View>
+              <ListItem
+                item={item}
+                toDoList={toDoList}
+                setToDoList={setToDoList}
+                i={i}
+                isLast={isLast}
+                setShowMenu={setShowMenu}
+              />
             );
           }}
         />

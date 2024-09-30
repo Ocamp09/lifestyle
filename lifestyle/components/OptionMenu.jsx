@@ -3,17 +3,31 @@ import { Colors } from "../constants/Colors";
 import HorizontalRule from "./styling/HotizontalRule";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const OptionMenu = () => {
+const OptionMenu = ({ index }) => {
+  const changeListName = (input) => {
+    var update = [...list];
+    update[index].name = input;
+    setList(update);
+    setDisplayListName(input);
+  };
+
+  const deleteList = () => {
+    var update = [...list];
+    update.splice(index, 1);
+    setList(update);
+  };
+
   return (
     <View style={styles.blurWindow}>
-      <View style={styles.preview}>
-        {/* <Text style={styles.text}>Name here</Text> */}
-      </View>
+      <View style={styles.preview}></View>
       <View style={styles.menu}>
         {/* <Button title={"pin"} style={styles.text}>
           Pin
         </Button> */}
         <Pressable
+          onPress={() => {
+            changeListName;
+          }}
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? Colors.dark.select : Colors.dark.tint,
@@ -30,6 +44,9 @@ const OptionMenu = () => {
         </Pressable>
         <HorizontalRule noPadding={true} />
         <Pressable
+          onPress={() => {
+            deleteList;
+          }}
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? Colors.dark.select : Colors.dark.tint,
@@ -78,7 +95,6 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     paddingTop: 15,
     paddingBottom: 10,
-    display: "none",
   },
 
   menu: {
