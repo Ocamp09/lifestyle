@@ -1,43 +1,28 @@
 import { View, FlatList } from "react-native";
 import CheckItem from "./CheckItem";
-import HorizontalRule from "./styling/HotizontalRule";
 import ListName from "./ListName";
 
-const List = ({
-  item,
-  toDoList,
-  setToDoList,
-  i,
-  isLast,
-  setShowMenu,
-  setMenuIndex,
-}) => {
+const List = ({ list, setList, i }) => {
   return (
     <View key={i}>
-      <ListName
-        name={item.name}
-        setMenuTrigger={setShowMenu}
-        setMenuIndex={setMenuIndex}
-        index={i}
-      />
+      <ListName index={i} list={list} setList={setList} />
       <View>
         <FlatList
           scrollEnabled={false}
-          data={item.items}
+          data={list[i].items}
           renderItem={({ item, index }) => {
             return (
               <CheckItem
                 key={index}
                 text={item.name}
-                setCurrList={setToDoList}
-                currList={toDoList}
+                setCurrList={setList}
+                currList={list}
                 index={index}
                 i={i}
               />
             );
           }}
         />
-        {!isLast && <HorizontalRule />}
       </View>
     </View>
   );

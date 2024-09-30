@@ -1,19 +1,28 @@
 import { StyleSheet, Pressable, View, Text } from "react-native";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
+import OptionMenu from "./OptionMenu";
 
-const ListName = ({ name, setMenuTrigger, setMenuIndex, index }) => {
-  const [displayListName, setDisplayListName] = useState(name);
+const ListName = ({ index, list, setList }) => {
+  const [menuTrigger, setMenuTrigger] = useState(false);
 
   return (
     <View>
+      {menuTrigger && (
+        <OptionMenu
+          setMenuTrigger={setMenuTrigger}
+          setList={setList}
+          list={list}
+          index={index}
+        />
+      )}
+
       <Pressable
         onLongPress={() => {
           setMenuTrigger(true);
-          setMenuIndex(index);
         }}
       >
-        <Text style={styles.listNameText}>{displayListName}</Text>
+        <Text style={styles.listNameText}>{list[index].name}</Text>
       </Pressable>
     </View>
   );

@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import { Colors } from "../constants/Colors";
-import OptionMenu from "./OptionMenu";
 import List from "./List";
+import HorizontalRule from "./styling/HotizontalRule";
 
 const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -31,19 +31,11 @@ const DisplayPane = ({ name }) => {
       ],
     },
   ]);
-  const [showMenu, setShowMenu] = useState(false);
-  const [menuIndex, setMenuIndex] = useState();
+
+  console.log(toDoList);
 
   return (
     <View style={styles.DisplayPane}>
-      {showMenu && (
-        <OptionMenu
-          index={menuIndex}
-          list={toDoList}
-          setList={setToDoList}
-          setMenuTrigger={setShowMenu}
-        />
-      )}
       <View style={styles.DisplayPaneHeader}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
@@ -58,15 +50,10 @@ const DisplayPane = ({ name }) => {
             const isLast = toDoList.length - 1 === index;
             const i = index;
             return (
-              <List
-                item={item}
-                toDoList={toDoList}
-                setToDoList={setToDoList}
-                i={i}
-                isLast={isLast}
-                setShowMenu={setShowMenu}
-                setMenuIndex={setMenuIndex}
-              />
+              <View>
+                <List list={toDoList} setList={setToDoList} i={i} />
+                {!isLast && <HorizontalRule />}
+              </View>
             );
           }}
         />
