@@ -3,7 +3,7 @@ import { Colors } from "../constants/Colors";
 import HorizontalRule from "./styling/HotizontalRule";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const OptionMenu = ({ index }) => {
+const OptionMenu = ({ index, list, setList, setMenuTrigger }) => {
   const changeListName = (input) => {
     var update = [...list];
     update[index].name = input;
@@ -15,6 +15,7 @@ const OptionMenu = ({ index }) => {
     var update = [...list];
     update.splice(index, 1);
     setList(update);
+    setMenuTrigger(false);
   };
 
   return (
@@ -45,7 +46,7 @@ const OptionMenu = ({ index }) => {
         <HorizontalRule noPadding={true} />
         <Pressable
           onPress={() => {
-            deleteList;
+            deleteList();
           }}
           style={({ pressed }) => [
             {

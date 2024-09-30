@@ -3,10 +3,23 @@ import CheckItem from "./CheckItem";
 import HorizontalRule from "./styling/HotizontalRule";
 import ListName from "./ListName";
 
-const ListItem = ({ item, toDoList, setToDoList, i, isLast, setShowMenu }) => {
+const List = ({
+  item,
+  toDoList,
+  setToDoList,
+  i,
+  isLast,
+  setShowMenu,
+  setMenuIndex,
+}) => {
   return (
     <View key={i}>
-      <ListName name={item.name} setMenuTrigger={setShowMenu} />
+      <ListName
+        name={item.name}
+        setMenuTrigger={setShowMenu}
+        setMenuIndex={setMenuIndex}
+        index={i}
+      />
       <View>
         <FlatList
           scrollEnabled={false}
@@ -30,4 +43,4 @@ const ListItem = ({ item, toDoList, setToDoList, i, isLast, setShowMenu }) => {
   );
 };
 
-export default ListItem;
+export default List;

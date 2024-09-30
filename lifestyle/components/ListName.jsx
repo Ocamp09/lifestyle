@@ -2,7 +2,7 @@ import { StyleSheet, Pressable, View, Text } from "react-native";
 import { useState } from "react";
 import { Colors } from "../constants/Colors";
 
-const ListName = ({ name, setMenuTrigger }) => {
+const ListName = ({ name, setMenuTrigger, setMenuIndex, index }) => {
   const [displayListName, setDisplayListName] = useState(name);
 
   return (
@@ -10,6 +10,7 @@ const ListName = ({ name, setMenuTrigger }) => {
       <Pressable
         onLongPress={() => {
           setMenuTrigger(true);
+          setMenuIndex(index);
         }}
       >
         <Text style={styles.listNameText}>{displayListName}</Text>

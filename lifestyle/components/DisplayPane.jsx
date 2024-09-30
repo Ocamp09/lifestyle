@@ -4,7 +4,7 @@ import { useState } from "react";
 import ButtonBar from "./ButtonBar";
 import { Colors } from "../constants/Colors";
 import OptionMenu from "./OptionMenu";
-import ListItem from "./ListItem";
+import List from "./List";
 
 const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState([
@@ -32,10 +32,18 @@ const DisplayPane = ({ name }) => {
     },
   ]);
   const [showMenu, setShowMenu] = useState(false);
+  const [menuIndex, setMenuIndex] = useState();
 
   return (
     <View style={styles.DisplayPane}>
-      {showMenu && <OptionMenu />}
+      {showMenu && (
+        <OptionMenu
+          index={menuIndex}
+          list={toDoList}
+          setList={setToDoList}
+          setMenuTrigger={setShowMenu}
+        />
+      )}
       <View style={styles.DisplayPaneHeader}>
         <View style={styles.headerTextView}>
           <Text style={styles.headerText}>{name}</Text>
@@ -50,13 +58,14 @@ const DisplayPane = ({ name }) => {
             const isLast = toDoList.length - 1 === index;
             const i = index;
             return (
-              <ListItem
+              <List
                 item={item}
                 toDoList={toDoList}
                 setToDoList={setToDoList}
                 i={i}
                 isLast={isLast}
                 setShowMenu={setShowMenu}
+                setMenuIndex={setMenuIndex}
               />
             );
           }}
