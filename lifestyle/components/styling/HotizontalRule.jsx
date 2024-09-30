@@ -1,7 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import { Colors } from "../../constants/Colors";
 
-const HorizontalRule = () => {
+const HorizontalRule = ({ noPadding }) => {
+  if (noPadding) {
+    return <View style={styles.horizontalRuleNoPadding}></View>;
+  }
   return <View style={styles.horizontalRule}></View>;
 };
 
@@ -13,5 +16,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: 10,
     marginBottom: 10,
+  },
+  horizontalRuleNoPadding: {
+    borderBottomColor: Colors.dark.text,
+    borderBottomWidth: 1,
   },
 });

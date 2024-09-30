@@ -1,19 +1,51 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
 import HorizontalRule from "./styling/HotizontalRule";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const OptionMenu = () => {
   return (
     <View style={styles.blurWindow}>
       <View style={styles.preview}>
-        <Text style={styles.text}>Name here</Text>
+        {/* <Text style={styles.text}>Name here</Text> */}
       </View>
       <View style={styles.menu}>
-        <Text style={styles.text}>Lower view</Text>
-        <HorizontalRule />
-        <Text style={styles.text}>Lower view</Text>
-        <HorizontalRule />
-        <Text style={styles.text}>Lower view</Text>
+        {/* <Button title={"pin"} style={styles.text}>
+          Pin
+        </Button> */}
+        <Pressable
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? Colors.dark.select : Colors.dark.tint,
+            },
+            styles.menuItem,
+          ]}
+        >
+          <Text style={styles.text}>Rename</Text>
+          <MaterialCommunityIcons
+            name="rename-box"
+            size={24}
+            color={Colors.dark.text}
+          />
+        </Pressable>
+        <HorizontalRule noPadding={true} />
+        <Pressable
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? Colors.dark.select : Colors.dark.tint,
+            },
+            styles.menuItem,
+          ]}
+        >
+          <Text style={[styles.text, { color: Colors.dark.delete }]}>
+            Delete
+          </Text>
+          <MaterialCommunityIcons
+            name="trash-can-outline"
+            size={24}
+            color={Colors.dark.delete}
+          />
+        </Pressable>
       </View>
     </View>
   );
@@ -34,6 +66,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: "white",
+    fontSize: 18,
   },
 
   preview: {
@@ -45,18 +78,28 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     paddingTop: 15,
     paddingBottom: 10,
+    display: "none",
   },
 
   menu: {
     marginTop: 15,
     backgroundColor: Colors.dark.tint,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 15,
-    paddingBottom: 10,
     borderRadius: 10,
     width: "60%",
     marginLeft: "auto",
     marginRight: "auto",
+    height: 125,
+  },
+
+  menuItem: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 15,
+    paddingBottom: 10,
   },
 });

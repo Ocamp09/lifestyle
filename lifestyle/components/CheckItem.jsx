@@ -68,7 +68,7 @@ const CheckItem = ({ text, setCurrList, currList, index, i }) => {
         <MaterialCommunityIcons
           name="trash-can-outline"
           size={24}
-          color="#dd2150"
+          color={Colors.dark.delete}
         />
       </View>
     );
