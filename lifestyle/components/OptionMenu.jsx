@@ -3,19 +3,14 @@ import { Colors } from "../constants/Colors";
 import HorizontalRule from "./styling/HotizontalRule";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import List from "./List";
+import { useState } from "react";
 
-const OptionMenu = ({ index, list, setList, setMenuTrigger }) => {
-  const changeListName = (input) => {
-    var update = [...list];
-    update[index].name = input;
-    setList(update);
-    setDisplayListName(input);
-  };
+const OptionMenu = ({ index, list, setList, setMenuTrigger, nameRef }) => {
+  const [rename, setRename] = useState(false);
 
   const deleteList = () => {
     var update = [...list];
     update.splice(index, 1);
-    console.log("deleted", update);
     setList(update);
     setMenuTrigger(false);
   };
@@ -24,7 +19,7 @@ const OptionMenu = ({ index, list, setList, setMenuTrigger }) => {
     <Modal animationType="slide" transparent={true} visible={true}>
       <View style={styles.blurWindow}>
         <View style={styles.preview}>
-          <List i={index} list={list} setList={setList} />
+          <List i={index} list={list} setList={setList} rename={rename} />
         </View>
         <View style={styles.menu}>
           {/* <Button title={"pin"} style={styles.text}>
@@ -32,7 +27,8 @@ const OptionMenu = ({ index, list, setList, setMenuTrigger }) => {
         </Button> */}
           <Pressable
             onPress={() => {
-              changeListName;
+              setRename(true);
+              //   nameRef.current.focus();
             }}
             style={({ pressed }) => [
               {

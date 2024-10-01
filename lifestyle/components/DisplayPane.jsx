@@ -51,7 +51,12 @@ const DisplayPane = ({ name }) => {
             const i = index;
             return (
               <View>
-                <List list={toDoList} setList={setToDoList} i={i} />
+                <List
+                  list={toDoList}
+                  setList={setToDoList}
+                  i={i}
+                  rename={false}
+                />
                 {!isLast && <HorizontalRule />}
               </View>
             );
