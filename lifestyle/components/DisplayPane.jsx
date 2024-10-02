@@ -9,30 +9,40 @@ import HorizontalRule from "./styling/HotizontalRule";
 const DisplayPane = ({ name }) => {
   const [toDoList, setToDoList] = useState([
     {
-      name: "List Name",
+      name: "Today",
       items: [
         {
-          name: "First item",
+          name: "Make grocery list",
           completed: false,
         },
         {
-          name: "Second item",
+          name: "Restock the fridge",
+          completed: false,
+        },
+        {
+          name: "Pay rent",
           completed: false,
         },
       ],
     },
     {
-      name: "List Name 2",
+      name: "Cleaning",
       items: [
         {
-          name: "First item 2",
+          name: "Kitchen",
+          completed: false,
+        },
+        {
+          name: "Bathroom",
+          completed: false,
+        },
+        {
+          name: "Bedroom",
           completed: false,
         },
       ],
     },
   ]);
-
-  console.log(toDoList);
 
   return (
     <View style={styles.DisplayPane}>

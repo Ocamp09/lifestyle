@@ -1,12 +1,58 @@
-import { View, StyleSheet, Text, Pressable, Modal } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Pressable,
+  Modal,
+  Platform,
+} from "react-native";
 import { Colors } from "../constants/Colors";
 import HorizontalRule from "./styling/HotizontalRule";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import List from "./List";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const OptionMenu = ({ index, list, setList, setMenuTrigger, nameRef }) => {
+const OptionMenu = ({ index, list, setList, setMenuTrigger }) => {
   const [rename, setRename] = useState(false);
+  const [previewDimensions, setPreviewDimensions] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+  const previewRef = useRef(null);
+
+  const handleLayout = (event) => {
+    const { x, y, width, height } = event.nativeEvent.layout;
+    setPreviewDimensions({ x, y, width, height });
+  };
+
+  const tapOutside = (event) => {
+    const { x, y, width, height } = previewDimensions;
+
+    if (Platform.OS === "ios") {
+      const { locationX, locationY } = event.nativeEvent;
+
+      if (
+        locationX < x ||
+        locationX > x + width ||
+        locationY < y ||
+        locationY > y + height
+      ) {
+        setMenuTrigger(false);
+      }
+    } else {
+      const { clientX, clientY } = event.nativeEvent;
+      if (
+        clientX < x ||
+        clientX > x + width ||
+        clientY < y ||
+        clientY > y + height
+      ) {
+        setMenuTrigger(false);
+      }
+    }
+  };
 
   const deleteList = () => {
     var update = [...list];
@@ -17,19 +63,21 @@ const OptionMenu = ({ index, list, setList, setMenuTrigger, nameRef }) => {
 
   return (
     <Modal animationType="slide" transparent={true} visible={true}>
-      <View style={styles.blurWindow}>
-        <View style={styles.preview}>
-          <List i={index} list={list} setList={setList} rename={rename} />
+      <Pressable
+        onPress={(event) => {
+          tapOutside(event);
+        }}
+        style={styles.blurWindow}
+      >
+        <View style={styles.preview} ref={previewRef} onLayout={handleLayout}>
+          <List i={index} list={list} setList={setList} rename={true} />
         </View>
         <View style={styles.menu}>
           {/* <Button title={"pin"} style={styles.text}>
           Pin
         </Button> */}
-          <Pressable
-            onPress={() => {
-              setRename(true);
-              //   nameRef.current.focus();
-            }}
+          {/* <Pressable
+            onPress={handleFocus}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
@@ -46,7 +94,7 @@ const OptionMenu = ({ index, list, setList, setMenuTrigger, nameRef }) => {
               color={Colors.dark.text}
             />
           </Pressable>
-          <HorizontalRule noPadding={true} />
+          <HorizontalRule noPadding={true} /> */}
           <Pressable
             onPress={() => {
               deleteList();
@@ -70,7 +118,7 @@ const OptionMenu = ({ index, list, setList, setMenuTrigger, nameRef }) => {
             />
           </Pressable>
         </View>
-      </View>
+      </Pressable>
     </Modal>
   );
 };
@@ -108,7 +156,8 @@ const styles = StyleSheet.create({
     width: "50%",
     marginLeft: "auto",
     marginRight: "auto",
-    height: 100,
+    // height: 100,
+    height: 60,
   },
 
   menuItem: {

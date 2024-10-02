@@ -13,6 +13,10 @@ const ListName = ({ index, list, setList, rename }) => {
     setList(update);
   };
 
+  const openMenu = () => {
+    setMenuTrigger(true);
+  };
+
   return (
     <View>
       {menuTrigger && (
@@ -37,11 +41,7 @@ const ListName = ({ index, list, setList, rename }) => {
         />
       )}
       {!rename && (
-        <Pressable
-          onLongPress={() => {
-            setMenuTrigger(true);
-          }}
-        >
+        <Pressable onLongPress={openMenu}>
           <Text style={styles.listNameText}>{list[index].name}</Text>
         </Pressable>
       )}
