@@ -1,7 +1,15 @@
-import { StyleSheet, Pressable, View, Text, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Pressable,
+  View,
+  Text,
+  TextInput,
+  Vibration,
+} from "react-native";
 import { useState, useRef } from "react";
 import { Colors } from "../constants/Colors";
 import OptionMenu from "./OptionMenu";
+import * as Haptics from "expo-haptics";
 
 const ListName = ({ index, list, setList, rename }) => {
   const [menuTrigger, setMenuTrigger] = useState(false);
@@ -13,7 +21,13 @@ const ListName = ({ index, list, setList, rename }) => {
     setList(update);
   };
 
+  const options = {
+    enableVibrateFallback: true,
+    ignoreAndroidSystemSettings: false,
+  };
+
   const openMenu = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setMenuTrigger(true);
   };
 

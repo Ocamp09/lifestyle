@@ -3913,6 +3913,11 @@ expo-font@~12.0.10:
   dependencies:
     fontfaceobserver "^2.1.0"
 
+expo-haptics@~13.0.1:
+  version "13.0.1"
+  resolved "https://registry.npmjs.org/expo-haptics/-/expo-haptics-13.0.1.tgz"
+  integrity sha512-qG0EOLDE4bROVT3DtUSyV9g3iB3YFu9j3711X7SNNEnBDXc+2/p3wGDPTnJvPW0ao6HG3/McAOrBQA5hVSdWng==
+
 expo-keep-awake@~13.0.2:
   version "13.0.2"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-13.0.2.tgz"
@@ -5458,11 +5463,6 @@ lightningcss-darwin-arm64@1.19.0:
   version "1.19.0"
   resolved "https://registry.npmjs.org/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.19.0.tgz"
   integrity sha512-wIJmFtYX0rXHsXHSr4+sC5clwblEMji7HHQ4Ub1/CznVRxtCFha6JIt5JZaNf8vQrfdZnBxLLC6R8pC818jXqg==
-
-lightningcss-darwin-x64@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.19.0.tgz"
-  integrity sha512-Lif1wD6P4poaw9c/4Uh2z+gmrWhw/HtXFoeZ3bEsv6Ia4tt8rOJBdkfVaUJ6VXmpKHALve+iTyP2+50xY1wKPw==
 
 lightningcss@~1.19.0:
   version "1.19.0"
